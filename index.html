@@ -8,11 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --bg: #0a0a0a;
@@ -20,7 +16,6 @@
             --text: #e5e5e5;
             --text-dim: #888;
             --accent: #00ff88;
-            --accent-dim: #00cc6a;
             --border: #222;
         }
 
@@ -32,58 +27,19 @@
             min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
         /* Header */
-        header {
-            padding: 80px 0 60px;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-        }
-
-        h1 {
-            font-size: clamp(2rem, 6vw, 4rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
-        }
-
-        h1 span {
-            color: var(--accent);
-        }
-
-        .tagline {
-            font-size: 1rem;
-            color: var(--text-dim);
-            font-weight: 300;
-        }
-
-        .tagline span {
-            color: var(--accent);
-        }
+        header { padding: 80px 0 60px; text-align: center; border-bottom: 1px solid var(--border); }
+        h1 { font-size: clamp(2rem, 6vw, 4rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+        h1 span { color: var(--accent); }
+        .tagline { font-size: 1rem; color: var(--text-dim); font-weight: 300; }
+        .tagline span { color: var(--accent); }
 
         /* Content Grid */
-        .content-section {
-            padding: 60px 0;
-        }
-
-        .section-title {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-dim);
-            margin-bottom: 32px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-        }
+        .content-section { padding: 60px 0; }
+        .section-title { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 32px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
 
         /* Card */
         .card {
@@ -91,74 +47,69 @@
             border: 1px solid var(--border);
             padding: 24px;
             transition: all 0.2s ease;
-            text-decoration: none;
-            color: inherit;
+            cursor: pointer;
             display: block;
         }
+        .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .card-date { font-size: 0.75rem; color: var(--accent); margin-bottom: 12px; }
+        .card-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+        .card-excerpt { font-size: 0.875rem; color: var(--text-dim); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-meta { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; gap: 12px; font-size: 0.75rem; }
+        .card-tag { color: var(--text-dim); background: var(--bg); padding: 4px 8px; }
 
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .card-date {
-            font-size: 0.75rem;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .card-excerpt {
-            font-size: 0.875rem;
-            color: var(--text-dim);
-            line-height: 1.6;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .card-meta {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
-            gap: 12px;
-            font-size: 0.75rem;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            padding: 24px;
         }
-
-        .card-tag {
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .modal {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            max-width: 640px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 32px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal { transform: translateY(0); }
+        
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
             color: var(--text-dim);
-            background: var(--bg);
-            padding: 4px 8px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            line-height: 1;
         }
+        .modal-close:hover { color: var(--accent); }
+        
+        .modal-date { font-size: 0.75rem; color: var(--accent); margin-bottom: 8px; }
+        .modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+        .modal-body { font-size: 0.95rem; color: var(--text-dim); line-height: 1.8; white-space: pre-wrap; }
+        .modal-meta { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; gap: 12px; font-size: 0.75rem; }
+        .modal-tag { color: var(--accent); background: var(--bg); padding: 4px 12px; }
 
         /* Footer */
-        footer {
-            padding: 60px 0;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            font-size: 0.875rem;
-            color: var(--text-dim);
-        }
-
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        /* Empty State */
-        .empty {
-            text-align: center;
-            padding: 80px 0;
-            color: var(--text-dim);
-        }
+        footer { padding: 60px 0; border-top: 1px solid var(--border); text-align: center; font-size: 0.875rem; color: var(--text-dim); }
+        footer a { color: var(--accent); text-decoration: none; }
+        .empty { text-align: center; padding: 80px 0; color: var(--text-dim); }
     </style>
 </head>
 <body>
@@ -172,9 +123,7 @@
     <main class="container">
         <section class="content-section">
             <h2 class="section-title">Latest Content</h2>
-            <div class="grid" id="content-grid">
-                <!-- Content will be inserted here by JavaScript -->
-            </div>
+            <div class="grid" id="content-grid"></div>
         </section>
     </main>
 
@@ -184,69 +133,209 @@
         </div>
     </footer>
 
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-date" id="modal-date"></div>
+            <h2 class="modal-title" id="modal-title"></h2>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-meta">
+                <span class="modal-tag" id="modal-platform"></span>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Content data - automatically updated by GitHub Actions
+    (function() {
+        'use strict';
+        
+        // Content data - add fullBody for complete content
         const content = [
             {
                 title: "Investing 101 for Beginners",
                 date: "2026-04-05",
-                excerpt: "Investing isn't for the rich. It's how you become rich. 5 things every beginner needs to know: start early, index funds > stocks, emergency fund first, only invest what you won't need for 5+ years, be consistent.",
+                excerpt: "Investing isn't for the rich. It's how you become rich. 5 things every beginner needs to know.",
                 platform: "LinkedIn",
-                url: "#"
+                fullBody: `Investing isn't for the rich. It's how you become rich.
+
+5 things every beginner needs to know:
+
+1. START EARLY, NOT BIG
+$50/month at 25 beats $200/month at 40. Compound interest is your superpower. Time is your biggest asset.
+
+2. INDEX FUNDS > INDIVIDUAL STOCKS
+Don't try to beat the market. Own the market. Low fees, instant diversification. Let the professionals worry about picking winners.
+
+3. EMERGENCY FUND FIRST
+Before investing, save 3-6 months of expenses. That's your safety net. Don't invest money you'll need tomorrow.
+
+4. NEVER INVEST WHAT YOU CAN'T AFFORD TO LOSE
+Only money you won't need for 5+ years goes to investing. The market fluctuates. Your timeline shouldn't.
+
+5. THE POWER OF CONSISTENCY
+Dollar-cost averaging. Same amount, same day every month. Removes emotion from investing. Automate it.
+
+The best time to start investing was 10 years ago. The second best time is today.`
             },
             {
                 title: "AI Productivity Tips for Remote Workers",
                 date: "2026-04-04",
-                excerpt: "The remote workers who will outpace everyone else? They're the ones using AI. Not because AI is magic. Because it handles the work that drains your day.",
+                excerpt: "The remote workers who will outpace everyone else? They're the ones using AI.",
                 platform: "LinkedIn",
-                url: "#"
+                fullBody: `The remote workers who will outpace everyone else? They're the ones using AI. Not because AI is magic. Because it handles the work that drains your day.
+
+1. AI TIME-BLOCKING
+Your calendar sorts itself. Meetings get scheduled around deep work, not the other way around.
+
+2. THE AI SECOND BRAIN
+Every idea, article, and note you capture gets organized and retrievable instantly. Never lose a great thought again.
+
+3. AI-POWERED MEETINGS
+Automated notes, action items, and summaries that make every meeting actionable, not time-wasting.
+
+4. THE 80/20 RULE OF AI PRODUCTIVITY
+Focus on the 20% of tasks that drive 80% of results while AI handles the rest.
+
+5. FUTURE-PROOF YOUR CAREER
+Why remote workers who use AI will outpace those who don't — and how to start today.`
             },
             {
                 title: "One Person Business (Naval Ravikant Inspired)",
                 date: "2026-04-04",
-                excerpt: "The one-person business isn't a trend. It's the future. Naval Ravikant's formula: Leverage AI, not labor. Build products, not services.",
+                excerpt: "The one-person business isn't a trend. It's the future.",
                 platform: "Social",
-                url: "#"
+                fullBody: `The one-person business isn't a trend. It's the future.
+
+Naval Ravikant's formula:
+
+1. LEVERAGE YOUR MIND, NOT YOUR TIME
+Use AI + automation to scale without hiring. Your code, content, and creativity are leverage.
+
+2. OWN YOUR EQUITY
+Build something that owns its own distribution. Products > services. 0 → 1 before 1 → 100.
+
+3. SPECIFIC KNOWLEDGE IS UNSTOPPABLE
+What do you know that others can't easily learn? Build a business around that unique skill.
+
+4. BET ON YOURSELF
+Long-term thinking. Compound interest. The best time to start was last year. The second best time is now.
+
+5. THE INTERNET AMPLIFIER
+Use Twitter, LinkedIn, YouTube as your leverage. 0 employees. Global reach.
+
+The oldest business model just got an upgrade.`
             },
             {
                 title: "OpenClaw - Your Personal AI Infrastructure",
                 date: "2026-04-04",
-                excerpt: "OpenClaw isn't just another AI assistant. It's your personal AI infrastructure. Think of it as having a team of AI agents working for you 24/7.",
+                excerpt: "OpenClaw isn't just another AI assistant. It's your personal AI infrastructure.",
                 platform: "Facebook",
-                url: "#"
+                fullBody: `OpenClaw isn't just another AI assistant. It's your personal AI infrastructure.
+
+Think of it as having a team of AI agents working for you 24/7 — handling tasks, managing workflows, and automating what used to take hours.
+
+What makes OpenClaw different? It connects to your existing tools: Discord, your code, your calendar, your data. It learns your preferences. It adapts to how you work.
+
+No complicated setup. No steep learning curve. Just tell OpenClaw what you need, and it figures out how to get it done.
+
+Companies already use OpenClaw to:
+→ Run autonomous coding agents
+→ Coordinate multi-agent workflows
+→ Automate content creation
+→ Build custom AI assistants
+
+The future of work isn't about working harder. It's about working smarter. OpenClaw is your partner in that journey.`
             },
             {
                 title: "Why Use KiloCode for Personal Productivity",
                 date: "2026-04-04",
-                excerpt: "Ever feel like you're drowning in tasks while AI tools sit unused? KiloCode changed that for me. It's an AI assistant that runs in the background.",
+                excerpt: "Ever feel like you're drowning in tasks while AI tools sit unused?",
                 platform: "Facebook",
-                url: "#"
+                fullBody: `Ever feel like you're drowning in tasks while AI tools sit unused?
+
+KiloCode changed that for me.
+
+It's an AI assistant that actually runs in the background — managing my calendar, drafting content, answering questions, and automating workflows while I sleep.
+
+No complex setup. No prompt engineering degrees needed.
+
+Just tell it what you need. It handles the rest.
+
+If you're still doing everything manually, you're working too hard.
+
+👉 Try KiloCode. Your future self will thank you.`
             },
             {
                 title: "Why People Should Learn AI",
                 date: "2026-04-04",
-                excerpt: "AI isn't the future anymore. It's right now. Every day, more people use AI to write emails, summarize meetings, build websites, and create content.",
+                excerpt: "AI isn't the future anymore. It's right now.",
                 platform: "Facebook",
-                url: "#"
+                fullBody: `AI isn't the future anymore. It's right now.
+
+Every day, more people use AI to write emails, summarize meetings, build websites, and create content — in minutes, not hours.
+
+The people who learn AI today aren't just staying ahead. They're pulling away from everyone who waits.
+
+You don't need to be a programmer. You don't need to be technical. You just need to start.
+
+Because the gap between "AI user" and "non-AI user" isn't closing. It's growing.
+
+Start small. Pick one tool. Use it daily. That's it.
+
+The best time to learn AI was last year. The second best time is today.`
             }
         ];
 
+        // DOM elements
         const grid = document.getElementById('content-grid');
-        
-        if (content.length === 0) {
-            grid.innerHTML = '<div class="empty">No content yet. Check back soon!</div>';
-        } else {
-            grid.innerHTML = content.map(item => `
-                <a href="${item.url}" class="card">
+        const modal = document.getElementById('modal');
+
+        // Render cards
+        function render() {
+            if (!content.length) {
+                grid.innerHTML = '<div class="empty">No content yet. Check back soon!</div>';
+                return;
+            }
+            grid.innerHTML = content.map((item, i) => `
+                <div class="card" onclick="openModal(${i})">
                     <div class="card-date">${item.date}</div>
                     <h3 class="card-title">${item.title}</h3>
                     <p class="card-excerpt">${item.excerpt}</p>
                     <div class="card-meta">
                         <span class="card-tag">${item.platform}</span>
                     </div>
-                </a>
+                </div>
             `).join('');
         }
+
+        // Modal functions
+        window.openModal = function(index) {
+            const item = content[index];
+            document.getElementById('modal-date').textContent = item.date;
+            document.getElementById('modal-title').textContent = item.title;
+            document.getElementById('modal-body').textContent = item.fullBody || item.excerpt;
+            document.getElementById('modal-platform').textContent = item.platform;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeModal = function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        // Close on overlay click or Escape
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Initialize
+        render();
+    })();
     </script>
 </body>
 </html>
