@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE AI MEDIA COMPANY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --card-bg: #141414;
+            --text: #e5e5e5;
+            --text-dim: #888;
+            --accent: #00ff88;
+            --accent-dim: #00cc6a;
+            --border: #222;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--text-dim);
+            font-weight: 300;
+        }
+
+        .tagline span {
+            color: var(--accent);
+        }
+
+        /* Content Grid */
+        .content-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 32px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* Card */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 24px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .card-date {
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .card-excerpt {
+            font-size: 0.875rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-meta {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            font-size: 0.75rem;
+        }
+
+        .card-tag {
+            color: var(--text-dim);
+            background: var(--bg);
+            padding: 4px 8px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-dim);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Empty State */
+        .empty {
+            text-align: center;
+            padding: 80px 0;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>THE AI <span>MEDIA</span> COMPANY</h1>
+            <p class="tagline">Built with <span>Toy</span> and <span>KiloClaw</span></p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+            <h2 class="section-title">Latest Content</h2>
+            <div class="grid" id="content-grid">
+                <!-- Content will be inserted here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 THE AI MEDIA COMPANY. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Content data - automatically updated by GitHub Actions
+        const content = [
+            {
+                title: "AI Productivity Tips for Remote Workers",
+                date: "2026-04-04",
+                excerpt: "The remote workers who will outpace everyone else? They're the ones using AI. Not because AI is magic. Because it handles the work that drains your day.",
+                platform: "LinkedIn",
+                url: "#"
+            },
+            {
+                title: "One Person Business (Naval Ravikant Inspired)",
+                date: "2026-04-04",
+                excerpt: "The one-person business isn't a trend. It's the future. Naval Ravikant's formula: Leverage AI, not labor. Build products, not services.",
+                platform: "Social",
+                url: "#"
+            },
+            {
+                title: "OpenClaw - Your Personal AI Infrastructure",
+                date: "2026-04-04",
+                excerpt: "OpenClaw isn't just another AI assistant. It's your personal AI infrastructure. Think of it as having a team of AI agents working for you 24/7.",
+                platform: "Facebook",
+                url: "#"
+            },
+            {
+                title: "Why Use KiloCode for Personal Productivity",
+                date: "2026-04-04",
+                excerpt: "Ever feel like you're drowning in tasks while AI tools sit unused? KiloCode changed that for me. It's an AI assistant that runs in the background.",
+                platform: "Facebook",
+                url: "#"
+            },
+            {
+                title: "Why People Should Learn AI",
+                date: "2026-04-04",
+                excerpt: "AI isn't the future anymore. It's right now. Every day, more people use AI to write emails, summarize meetings, build websites, and create content.",
+                platform: "Facebook",
+                url: "#"
+            }
+        ];
+
+        const grid = document.getElementById('content-grid');
+        
+        if (content.length === 0) {
+            grid.innerHTML = '<div class="empty">No content yet. Check back soon!</div>';
+        } else {
+            grid.innerHTML = content.map(item => `
+                <a href="${item.url}" class="card">
+                    <div class="card-date">${item.date}</div>
+                    <h3 class="card-title">${item.title}</h3>
+                    <p class="card-excerpt">${item.excerpt}</p>
+                    <div class="card-meta">
+                        <span class="card-tag">${item.platform}</span>
+                    </div>
+                </a>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
