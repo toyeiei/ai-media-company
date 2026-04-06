@@ -30,8 +30,9 @@ Kilo (CEO) ← KiloCode + OpenClaw
 ├──────────────────────────────────────┤
 │  #research   → Research topic       │
 │  #drafts     → Generate 5 ideas      │
-│  #review     → Editor approval       │
-│  #published  → Live content          │
+│  #review     → [APPROVAL GATE 🚦]   │
+│              → Toy reacts ✅         │
+│  #published  → Live content         │
 │  #social     → Platform adaptations │
 │  #update     → Progress tracking     │
 └──────────────────────────────────────┘
@@ -47,9 +48,9 @@ GitHub → GitHub Pages (auto-deploy)
 |---------|---------|
 | `#research` | Submit content topics |
 | `#drafts` | Draft content + research |
-| `#review` | Editor approvals |
+| `#review` | Content pending your approval — react ✅ to publish |
 | `#published` | Live content archive |
-| `#social` | Platform-adapted posts |
+| `#social` | Platform-adapted posts (Twitter, LinkedIn, etc.) |
 | `#update` | Progress & setup updates |
 
 ---
@@ -91,10 +92,10 @@ GitHub → GitHub Pages (auto-deploy)
 1. **Submit** — DM Kilo or post in `#research`
 2. **Research** — Agent generates 5 key ideas
 3. **Draft** — Content written based on ideas
-4. **Review** — Editor approves
-5. **Publish** — Content goes live
-6. **Social** — Adapted for LinkedIn, Twitter, Facebook
-7. **Blog** — Auto-deploys to GitHub Pages
+4. **Review** — Editor reviews full content
+5. **Approval Gate** — Toy reacts ✅ to approve (❌ to request changes)
+6. **Publish** — On approval → GitHub push + `index.html` update + `#published`
+7. **Social** — Adapted posts sent to `#social` for manual posting
 
 ---
 
