@@ -91,7 +91,7 @@ GitHub → GitHub Pages (auto-deploy)
 
 1. **Submit** — DM Kilo or post in `#research`
 2. **Research** — Agent generates 5 key ideas
-3. **Draft** — Content written based on ideas
+3. **Draft** — Content written based on ideas (**200-220 words**)
 4. **Review** — Editor reviews full content
 5. **Approval Gate** — Toy reacts ✅ to approve (❌ to request changes)
 6. **Publish** — On approval → GitHub push + `index.html` update + `#published`
